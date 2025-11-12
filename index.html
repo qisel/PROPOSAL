@@ -33,35 +33,30 @@
             padding-top: 2rem;
         }
         
-        /* COVER PAGE STYLING (For Dramatic Effect) */
+        /* COVER PAGE STYLING */
         .cover-page {
             display: none;
             position: relative;
-            overflow: hidden; /* Ensure background doesn't bleed */
+            overflow: hidden; 
+            /* Enforce full page height for print view */
         }
         
-        /* Background Layer for Drama */
-        .cover-page-bg {
+        /* Image Element for Cover Background (Better Print Support than background-image) */
+        .cover-page-image {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            /* MENGGUNAKAN FOTO 1 DARI USER UNTUK SAMPUL */
-            background-image: url('1000008660.jpg-983522ed-3394-46c9-8dd0-d1115289f896');
-            background-size: cover;
-            background-position: center;
-            /* Applying dark filter for dramatic contrast */
-            filter: grayscale(100%) brightness(30%); 
+            object-fit: cover;
+            filter: grayscale(100%) brightness(30%); /* Dark filter for screen contrast */
             z-index: 10;
-            transition: all 0.3s ease; /* Smooth transition for better visuals */
         }
 
         /* Content Layer */
         .cover-page-content {
             position: relative;
             z-index: 20;
-            /* Enhance text readability over dark background */
             text-shadow: 0 4px 8px rgba(0, 0, 0, 0.7); 
         }
 
@@ -83,14 +78,15 @@
             .cover-page {
                 display: flex !important; 
                 page-break-after: always; 
-                height: 270mm; 
+                height: 270mm; /* A4 height approx */
                 align-items: center;
                 justify-content: center;
             }
             
-            /* Fix for print background on cover (Browsers might block print background images) */
-            .cover-page-bg {
-                 filter: grayscale(100%) brightness(50%); /* Lighter for print contrast */
+            /* Ensure the image is visible and high-contrast during print */
+            .cover-page-image {
+                 /* Adjust filter for printing: slightly brighter background, but still dark enough for white text */
+                 filter: grayscale(100%) brightness(50%) !important; 
             }
 
             /* 4. Ensure Main Content uses full page */
@@ -109,7 +105,8 @@
         /* Show the screen header only when not printing */
         @media screen {
             .cover-page {
-                display: none;
+                display: flex; /* Display cover page on screen */
+                min-height: 100vh; /* Full screen height */
             }
             header {
                 display: block !important;
@@ -120,47 +117,44 @@
 <body class="antialiased">
 
     
+<div class="cover-page bg-gray-900 text-white p-10">
+    
+    <!-- MENGGUNAKAN TAG IMG (Jauh lebih stabil saat dicetak daripada background-image) -->
+    <img 
+        src="https://scontent.fupg7-1.fna.fbcdn.net/v/t39.30808-6/581999601_857595320112064_2977754282856035861_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeEbTSgjBRWl5AKnEDvxm4ghOXSC4HHQb3o5dILgcdBvellB1flAzDmWQS120ks-D-vDCWNIfoQZMwJLS1hsqUNC&_nc_ohc=nWy1hWLglYwQ7kNvwH6tPbd&_nc_oc=AdlAQ_g_raJwt6GF0O-iJoU7KQOcRib-KK8u7u3DyQzzHvtmKNDGftiBWbxXr6sVh7o&_nc_zt=23&_nc_ht=scontent.fupg7-1.fna&_nc_gid=BaqZZzZMedtuMKcdrYe1wg&oh=00_AfiUCBtLn0l1gCkakbhqYBSdGkNOkO-w6mE52lJpbT13ww&oe=691985E0" 
+        alt="Jalan desa rusak parah" 
+        class="cover-page-image"
+        onerror="this.onerror=null;this.src='https://placehold.co/1080x1920/2d3748/ffffff?text=FOTO+SAMPUL+GAGAL+DIMUAT'"
+    >
 
-<div class="cover-page bg-gray-900 text-white min-h-screen flex items-center justify-center p-10">
+    <div class="cover-page-content max-w-xl text-center space-y-12 mx-auto">
+        <p class="text-2xl font-extrabold tracking-widest uppercase text-yellow-400 border-b-4 border-red-600 pb-2 mx-auto max-w-fit">
+            KRISIS AKSES
+        </p>
+
+        <h1 class="text-5xl md:text-7xl font-extrabold leading-none tracking-tight">
+            JALAN UTAMA <span class="text-red-500">MENGANCAM 700 JIWA</span>
+        </h1>
         
+        <p class="text-lg md:text-2xl font-light text-gray-300">
+            Proposal Cepat Tanggap: Pengadaan Material Pengerasan Jalan Barakati untuk Mengakhiri Genangan Permanen dan Lubang Maut.
+        </p>
 
-<div class="cover-page-bg"></div>
-
-        
-
-<div class="cover-page-content max-w-xl text-center space-y-12">
-            
-
-<p class="text-2xl font-extrabold tracking-widest uppercase text-yellow-400 border-b-4 border-red-600 pb-2 mx-auto max-w-fit">
-                KRISIS AKSES
-            </p>
-
-            <h1 class="text-5xl md:text-7xl font-extrabold leading-none tracking-tight">
-                JALAN UTAMA <span class="text-red-500">MENGANCAM 700 JIWA</span>
-            </h1>
-            
-            <p class="text-lg md:text-2xl font-light text-gray-300">
-                Proposal Cepat Tanggap: Pengadaan Material Pengerasan Jalan Barakati untuk Mengakhiri Genangan Permanen dan Lubang Maut.
-            </p>
-
-            
-
-<div class="bg-gray-900/80 backdrop-blur-sm p-6 rounded-xl shadow-2xl space-y-3 mx-auto max-w-sm border-t-4 border-red-600">
-                <p class="text-sm uppercase font-semibold text-red-500">LOKASI PROYEK PENTING</p>
-                <p class="text-3xl font-bold tracking-wider">DESA BARAKATI</p>
-                <p class="text-sm text-gray-400">Kecamatan Batudaa, Kabupaten Gorontalo</p>
-            </div>
-
-            <p class="pt-8 text-sm font-semibold text-gray-500">
-                Inisiator: Rukun Usaha Masyarakat (RUM) Desa Barakati | November 2025
-            </p>
+        <div class="bg-gray-900/80 backdrop-blur-sm p-6 rounded-xl shadow-2xl space-y-3 mx-auto max-w-sm border-t-4 border-red-600">
+            <p class="text-sm uppercase font-semibold text-red-500">LOKASI PROYEK PENTING</p>
+            <p class="text-3xl font-bold tracking-wider">DESA BARAKATI</p>
+            <p class="text-sm text-gray-400">Kecamatan Batudaa, Kabupaten Gorontalo</p>
         </div>
+
+        <p class="pt-8 text-sm font-semibold text-gray-500">
+            Inisiator: Rukun Usaha Masyarakat (RUM) Desa Barakati | November 2025
+        </p>
     </div>
+</div>
 
 
     
-
-<header class="bg-red-600 text-white shadow-xl">
+<header class="bg-red-600 text-white shadow-xl hidden print:hidden">
         <div class="max-w-3xl mx-auto px-4 py-8 md:py-12">
             <p class="text-sm opacity-90 mb-1">Proposal Komunitas Desa Barakati</p>
             <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">
@@ -171,11 +165,9 @@
     </header>
 
     
-
 <main class="max-w-3xl mx-auto p-4 md:p-8 space-y-10">
 
         
-
 <section class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600">
             <h2 class="section-title text-2xl font-bold text-gray-800">A. Latar Belakang Masalah</h2>
             <p class="text-gray-600 leading-relaxed mb-4">
@@ -187,7 +179,6 @@
         </section>
 
         
-
 <section class="bg-white p-6 rounded-xl shadow-lg">
             <h2 class="section-title text-2xl font-bold text-gray-800">B. Maksud dan Tujuan Proyek</h2>
             <ul class="list-disc list-inside text-gray-700 space-y-2 ml-4">
@@ -203,7 +194,6 @@
         </section>
 
         
-
 <section class="bg-red-50 p-6 rounded-xl shadow-lg border-l-4 border-red-600">
             <h2 class="section-title text-2xl font-bold text-gray-800">C. Data Pemanfaat dan Stakeholder Jalan</h2>
             <p class="text-gray-700 leading-relaxed mb-4">
@@ -236,7 +226,6 @@
         </section>
 
         
-
 <section class="bg-white p-6 rounded-xl shadow-lg">
             <h2 class="section-title text-2xl font-bold text-gray-800">D. Analisis Dampak Sosial & Ekonomi</h2>
             <p class="text-gray-600 mb-6 leading-relaxed">
@@ -259,18 +248,18 @@
         </section>
 
         
-
 <section>
             <h2 class="section-title text-2xl font-bold text-gray-800">Kondisi Eksisting (Sebelum Perbaikan)</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 
                 
-
+                
 <div class="bg-white rounded-xl shadow-md overflow-hidden transform transition duration-300 hover:scale-[1.02]">
                     <img 
-                        src="1000008660.jpg-983522ed-3394-46c9-8dd0-d1115289f896" 
+                        src="https://scontent.fupg7-1.fna.fbcdn.net/v/t39.30808-6/581999601_857595320112064_2977754282856035861_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeEbTSgjBRWl5AKnEDvxm4ghOXSC4HHQb3o5dILgcdBvellB1flAzDmWQS120ks-D-vDCWNIfoQZMwJLS1hsqUNC&_nc_ohc=nWy1hWLglYwQ7kNvwH6tPbd&_nc_oc=AdlAQ_g_raJwt6GF0O-iJoU7KQOcRib-KK8u7u3DyQzzHvtmKNDGftiBWbxXr6sVh7o&_nc_zt=23&_nc_ht=scontent.fupg7-1.fna&_nc_gid=BaqZZzZMedtuMKcdrYe1wg&oh=00_AfiUCBtLn0l1gCkakbhqYBSdGkNOkO-w6mE52lJpbT13ww&oe=691985E0" 
                         alt="Jalan rusak dengan genangan air (Foto 1)" 
                         class="w-full h-48 object-cover"
+                        onerror="this.onerror=null;this.src='https://placehold.co/600x400/CCCCCC/000000?text=FOTO+1'"
                     >
                     <p class="p-3 text-sm text-gray-700">Genangan air besar di badan jalan, menghambat akses kendaraan.</p>
                 </div>
@@ -279,9 +268,10 @@
 
 <div class="bg-white rounded-xl shadow-md overflow-hidden transform transition duration-300 hover:scale-[1.02]">
                     <img 
-                        src="1000008658.jpg-8ce9a8ef-fe56-4cd4-af5e-833395eb3574" 
+                        src="https://scontent.fupg7-1.fna.fbcdn.net/v/t39.30808-6/581772063_857595360112060_2493938111826904710_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHry6KK-heuoemDBqsGJgP0xT3DLoSwCyLFPcMuhLALIkqdQzYQJ_UYfepZEoehNDf9L5GeCdAy_qGNBZSFuy-3&_nc_ohc=MMOi1Fr2_OQQ7kNvwHrYdLe&_nc_oc=Adm45nsBn4GN_R19B4OA49npor_N7e45vm6SpbigUeF-loYaD9E9BEqr54zLjv7shLs&_nc_zt=23&_nc_ht=scontent.fupg7-1.fna&_nc_gid=2mZMu3j0CK1w-p2CUffmsA&oh=00_AfjC0UEqgXhFQA2RHdVpnxLy7WekgGr_Vg-4xn6I9juJdw&oe=69198BE7" 
                         alt="Lubang-lubang dan jalan becek di tengah pemukiman (Foto 2)" 
                         class="w-full h-48 object-cover"
+                        onerror="this.onerror=null;this.src='https://placehold.co/600x400/CCCCCC/000000?text=FOTO+2'"
                     >
                     <p class="p-3 text-sm text-gray-700">Lubang-lubang yang dalam menyebabkan pengendara harus ekstra hati-hati.</p>
                 </div>
@@ -290,9 +280,10 @@
 
 <div class="bg-white rounded-xl shadow-md overflow-hidden transform transition duration-300 hover:scale-[1.02]">
                     <img 
-                        src="1000008662.jpg-2f38aa99-6fc8-4ce4-8e22-a0efd2b2ec50" 
+                        src="https://scontent.fupg7-1.fna.fbcdn.net/v/t39.30808-6/581851533_857595396778723_5315979145311516487_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGPqNaQ9jpR4Ai14844RSLVsDLX2GDB4zmwMtfYYMHjOW5VDQDeg3C71R60hQS0k54ZihGuqnOF5x_NlYwLCFNp&_nc_ohc=7fBdOyTU3MUQ7kNvwGscDMz&_nc_oc=AdksiP29RzG_1pvqXofcyKoWyjF0OIW4yVfZrYo-LlHtxxvHnd6y_I1wlEEW6c46QdY&_nc_zt=23&_nc_ht=scontent.fupg7-1.fna&_nc_gid=yZEBpgtStcSd4gmwvt-SYg&oh=00_AfiKYPJwDUezkdQYY3FLpUpQsa9m-DJZco7Kh13ApkegPg&oe=69198AF1" 
                         alt="Jalan yang menghubungkan antar fasilitas desa (Foto 3)" 
                         class="w-full h-48 object-cover"
+                        onerror="this.onerror=null;this.src='https://placehold.co/600x400/CCCCCC/000000?text=FOTO+3'"
                     >
                     <p class="p-3 text-sm text-gray-700">Jalan utama yang vital ini membutuhkan perbaikan segera.</p>
                 </div>
@@ -300,7 +291,6 @@
         </section>
         
         
-
 <section class="p-6 rounded-xl shadow-lg border-l-4 border-red-600 bg-white">
             <h2 class="section-title text-2xl font-bold text-gray-800">E. Spesifikasi Teknis & Solusi</h2>
             
@@ -338,7 +328,6 @@
         </section>
 
         
-
 <section class="bg-gray-100 p-6 rounded-xl shadow-lg">
             <h2 class="section-title text-2xl font-bold text-gray-800">Lampiran 1: Rencana Anggaran Biaya (RAB)</h2>
             <p class="text-sm italic text-gray-600 mb-4">Total anggaran fokus pada pengadaan material Timbunan/Pengerasan Sirtu. Volume Timbunan: ± 225 m³</p>
@@ -380,8 +369,7 @@
     </main>
 
     
-
-<footer class="bg-gray-800 text-white mt-10">
+<footer class="bg-gray-800 text-white mt-10 hidden print:hidden">
         <div class="max-w-3xl mx-auto p-6 text-center text-sm">
             <p>Inisiatif oleh: Masyarakat dan RUM Desa Barakati | Ketua: Rum Yusran Luawo</p>
             <p class="mt-1">&copy; 2025 Proposal Pembangunan Desa Barakati, Kec. Batudaa.</p>
@@ -389,7 +377,6 @@
     </footer>
         
     
-
 <div class="print-closing max-w-3xl mx-auto px-6 pb-8 text-gray-700 hidden print:block">
         
         <p class="mt-8 text-xs text-right text-gray-500">Desa Barakati, November 2025</p>
